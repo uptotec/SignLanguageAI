@@ -21,9 +21,9 @@ const predict = (imagePath, perdition, setPrediction, setAccuracy) => {
   tflite.runModelOnImage(
     {
       path: imagePath,
-      imageMean: 128.0,
-      imageStd: 128.0,
-      numResults: 3,
+      imageMean: 0,
+      imageStd: 255,
+      numResults: 29,
       threshold: 0.5,
     },
     (err, res) => {

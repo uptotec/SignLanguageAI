@@ -2,6 +2,7 @@ A
 B
 C
 D
+del
 E
 F
 G
@@ -12,11 +13,13 @@ K
 L
 M
 N
+nothing
 O
 P
 Q
 R
 S
+space
 T
 U
 V
@@ -24,6 +27,3 @@ W
 X
 Y
 Z
-nothing
-space
-del
