@@ -23,8 +23,8 @@ const predict = (imagePath, perdition, setPrediction, setAccuracy) => {
       path: imagePath,
       imageMean: 0,
       imageStd: 255,
-      numResults: 29,
-      threshold: 0.5,
+      numResults: 3,
+      threshold: 0.1,
     },
     (err, res) => {
       if (err) {

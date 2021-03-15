@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-
-import ImageEditor from '@react-native-community/image-editor';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import * as Picker from 'react-native-image-picker';
 
 import predict from '../tflite/tflite';
 
@@ -9,50 +8,48 @@ const CameraView = ({camera, setAccuracy, setPrediction, prediction}) => {
   const takePicture = async function (Camera) {
     const options = {
       quality: 1,
-      base64: true,
+      base64: false,
       doNotSave: false,
-      width: 200,
+      width: 1000,
       fixOrientation: true,
     };
     const data = await Camera.takePictureAsync(options);
 
     console.log(data);
 
-    // let takenImageUri;
-
-    // Image.getSize(data.uri, (w, h) => {
-    //   const cropData = {
-    //     offset: {
-    //       x: 0,
-    //       y: h / 2 - w / 2,
-    //     },
-    //     size: {
-    //       width: w,
-    //       height: w,
-    //     },
-    //   };
-
-    //   ImageEditor.cropImage(
-    //     data.uri,
-    //     cropData,
-    //     (newURI) => {
-    //       takenImageUri = newURI;
-    //     },
-    //     (err) => {
-    //       console.log(err);
-    //     },
-    //   );
-    // });
-
     predict(data.uri, prediction, setPrediction, setAccuracy);
+  };
+
+  const option = {
+    mediaType: 'photo',
+    includeBase64: false,
+  };
+
+  const pickedImage = (res) => {
+    if (res.didCancel) {
+      return;
+    }
+
+    predict(res.uri, prediction, setPrediction, setAccuracy);
   };
 
   return (
     <View style={styles.ButtonView}>
       <TouchableOpacity
-        onPress={() => takePicture(camera)}
+        onPress={() => {
+          // Picker.launchImageLibrary(option, pickedImage);
+          takePicture(camera);
+        }}
         style={styles.capture}>
         <Text style={styles.captureText}> SNAP </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          Picker.launchImageLibrary(option, pickedImage);
+          // takePicture(camera);
+        }}
+        style={styles.capture}>
+        <Text style={styles.captureText}> GALLERY </Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {

@@ -7,7 +7,6 @@ import PendingView from './PendingView';
 
 const CameraComponent = ({setAccuracy, setPrediction, prediction}) => (
   <RNCamera
-    cameraViewDimensions={{width: 200, height: 200}}
     style={styles.preview}
     ratio={'1:1'}
     type={RNCamera.Constants.Type.back}
