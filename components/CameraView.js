@@ -37,7 +37,6 @@ const CameraView = ({camera, setAccuracy, setPrediction, prediction}) => {
     <View style={styles.ButtonView}>
       <TouchableOpacity
         onPress={() => {
-          // Picker.launchImageLibrary(option, pickedImage);
           takePicture(camera);
         }}
         style={styles.capture}>
@@ -46,7 +45,6 @@ const CameraView = ({camera, setAccuracy, setPrediction, prediction}) => {
       <TouchableOpacity
         onPress={() => {
           Picker.launchImageLibrary(option, pickedImage);
-          // takePicture(camera);
         }}
         style={styles.capture}>
         <Text style={styles.captureText}> GALLERY </Text>
